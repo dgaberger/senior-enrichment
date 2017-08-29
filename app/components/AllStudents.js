@@ -14,7 +14,7 @@ function AllStudents(props) {
 			<table className="col-xs-8">
 				<tbody>
 					<tr>
-						<th className="col-xs-2">ID</th>
+						<th className="col-xs-1">ID</th>
 						<th className="col-xs-2">Name</th>
 						<th className="col-xs-2">Email</th>
 						<th className="col-xs-1">Campus</th>
@@ -23,12 +23,13 @@ function AllStudents(props) {
 					</tr>
 					{
 						students.map(student => {
+							// console.log('STUDS', student.campus.name)
 							return (
 								<tr key={student.id}>
 									<td className="col-xs-1">{student.id}</td>
 									<td className="col-xs-2">{student.name}</td>
 									<td className="col-xs-2">{student.email}</td>
-									<td className="col-xs-1">{student.campus.name}</td>
+									<td className="col-xs-1">{student.campus ? student.campus.name : ''}</td>
 									<td className="col-xs-1">
 										<Link to={`/students/${student.id}`} className="btn btn-primary btn-xs">View</Link>
 									</td>

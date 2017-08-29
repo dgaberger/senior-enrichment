@@ -9,8 +9,8 @@ function SelectedStudent(props) {
 		<div className="col-xs-4 container">
 			<div>
 				<h3>Student Info:</h3>
-				<h4>{student.name}</h4>
-				<h4>{student.email}</h4>
+				<h4>Name: {student.name}</h4>
+				<h4>Email: {student.email}</h4>
 				<Link to={`../campuses/${student.campus.id}`}>
 				<h3>{student.campus.name}</h3>
 				</Link>

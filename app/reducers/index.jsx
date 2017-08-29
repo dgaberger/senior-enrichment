@@ -3,13 +3,24 @@ import axios from 'axios'
 
 const initialState = {
 	students: [],
-	campuses: []
+	campuses: [],
+	studentEntry: {
+		name: '',
+		email: '',
+		campusId: 0
+	},
+	campusEntry: {
+		name: '',
+		image: ''
+	}
 }
 
 const GET_ALL_STUDENTS = 'GET_ALL_STUDENTS'
 const GET_ALL_CAMPUSES = 'GET_ALL_CAMPUSES'
 const GET_ONE_STUDENT = 'GET_ONE_STUDENT'
 const GET_ONE_CAMPUS = 'GET_ONE_CAMPUS'
+const STUDENT_ENTRY = 'STUDENT_ENTRY'
+const CAMPUS_ENTRY = 'CAMPUS_ENTRY'
 
 //Action Creators
 export function getAllStudents(students){
@@ -29,6 +40,16 @@ export function getOneStudent(student){
 
 export function getOneCampus(campus){
 	const action = {type: GET_ONE_CAMPUS, campus}
+	return action
+}
+
+export function studentEntry(studentEntry){
+	const action = {type: STUDENT_ENTRY, studentEntry}
+	return action
+}
+
+export function enterCampus(campusEntry){
+	const action = {type: CAMPUS_ENTRY, campusEntry}
 	return action
 }
 
@@ -71,6 +92,16 @@ export function postCampus(newCampus){
 	        .then(res => res.data)
 	        .then(createdCampus => {
 	          dispatch(getOneCampus(createdCampus));
+	        })
+	}
+}
+
+export function editCampus(campus){
+	return function thunk (dispatch){
+		return axios.put(`/api/campuses/${campus.id}`, campus)
+	        .then(res => res.data)
+	        .then(editedCampus => {
+	          dispatch(getOneCampus(editedCampus));
 	        })
 	}
 }
@@ -123,6 +154,27 @@ const rootReducer = function(state = initialState, action) {
   			{}, 
   			state, 
   			{campuses: campusArr}
+  		)
+ 	case STUDENT_ENTRY:
+ 		// console.log('ACTION', state)
+  		return Object.assign(
+  			{}, 
+  			state, 
+  			{studentEntry: {
+  				name: action.studentEntry.name || state.studentEntry.name,
+  				email: action.studentEntry.email || state.studentEntry.email,
+  				campusId: action.studentEntry.campusId || state.studentEntry.campusId
+  			}}
+  		)
+  	case CAMPUS_ENTRY:
+ 		console.log('ACTION', state.campusEntry)
+  		return Object.assign(
+  			{}, 
+  			state, 
+  			{campusEntry: {
+  				name: action.campusEntry.name || state.campusEntry.name,
+  				image: action.campusEntry.image || state.campusEntry.image
+  			}}
   		)
   	default: 
     	return state

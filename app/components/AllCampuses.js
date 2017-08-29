@@ -20,7 +20,10 @@ function AllCampuses(props) {
 									<h4>{campus.name}</h4>
 									<img src={campus.image} className="img-responsive img-rounded" />
 								</Link>
-								<button className="btn btn-danger" onClick={evt => handleDelete(campus.id)}>Remove</button>
+								<div className="btn-group">
+									<Link to={`/campuses/${campus.id}/edit`} className="btn btn-warning" onClick={evt => console.log()}>Edit</Link>
+									<button className="btn btn-danger" onClick={evt => handleDelete(campus.id)}>Remove</button>
+								</div>
 							</div>
 						)
 					})
