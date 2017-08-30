@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 function SelectedCampus(props) {
-	console.log('props', props)
 	const campus = props.selected || {name: '', image: ''}
 	const students = props.students
 	return (
@@ -31,7 +30,6 @@ function SelectedCampus(props) {
 
 const mapStateToProps = function (state, ownProps){
 	const campusId = +ownProps.match.params.campusId
-	console.log('state', state, campusId)
 	return {
 		selected: state.campuses.find(campus => campus.id === campusId),
 		students: state.students.filter(student => student.campusId === campusId),

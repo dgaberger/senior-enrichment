@@ -46,7 +46,7 @@ const mapDispatchToProps = function (dispatch, ownProps){
 			console.log('ENTRY IS', store.getState().campusEntry)
 
 			dispatch(postCampus(store.getState().campusEntry))
-			dispatch(fetchCampuses())
+			// dispatch(fetchCampuses())
 		}
 	}
 }

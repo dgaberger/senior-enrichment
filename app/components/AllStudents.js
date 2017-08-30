@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import store, {deleteStudent, fetchStudents} from '../store'
+import store, {deleteStudent, fetchStudents, enterStudent} from '../store'
 
 function AllStudents(props) {
-	const {handleDelete, students} = props
+	const {handleDelete, students, handleEditPress} = props
 	return (
 		<div>
 			<h3>All Students:</h3>
@@ -34,7 +34,7 @@ function AllStudents(props) {
 										<Link to={`/students/${student.id}`} className="btn btn-primary btn-xs">View</Link>
 									</td>
 									<td className="col-xs-1">
-										<button className="btn btn-warning btn-xs">Edit</button>
+										<Link to={`/students/${student.id}/edit`} className="btn btn-warning btn-xs" onClick={evt => handleEditPress(student.name, student.email, student.campusId)}>Edit</Link>
 									</td>
 									<td className="col-xs-1">
 										<button className="btn btn-danger btn-xs" onClick={evt => handleDelete(student.id)}>X</button>
@@ -58,6 +58,10 @@ const mapStateToProps = function (state, ownProps){
 
 const mapDispatchToProps = function (dispatch, ownProps){
 	return {
+		handleEditPress(name, email, campusId){
+			dispatch(enterStudent({name, email, campusId}))
+			// console.log('image ehre', image)
+		},
 		handleDelete(id){
 			dispatch(deleteStudent(id))
 			dispatch(fetchStudents())

@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import store, {fetchCampuses, deleteCampus} from '../store'
+import {fetchCampuses, deleteCampus, enterCampus} from '../store'
 
 function AllCampuses(props) {
-	const {campuses, handleDelete} = props
+	const {handleDelete, handleEditPress} = props
+	const campuses = props.campuses || []
 	return (
 		<div>
 			<h3>Campuses</h3>
@@ -21,8 +22,17 @@ function AllCampuses(props) {
 									<img src={campus.image} className="img-responsive img-rounded" />
 								</Link>
 								<div className="btn-group">
-									<Link to={`/campuses/${campus.id}/edit`} className="btn btn-warning" onClick={evt => console.log()}>Edit</Link>
-									<button className="btn btn-danger" onClick={evt => handleDelete(campus.id)}>Remove</button>
+									<Link 
+										to={`/campuses/${campus.id}/edit`} 
+										className="btn btn-warning" 
+										onClick={evt => handleEditPress(campus.name, campus.image)}>
+										Edit
+									</Link>
+									<button 
+										className="btn btn-danger" 
+										onClick={evt => handleDelete(campus.id)}>
+										Remove
+									</button>
 								</div>
 							</div>
 						)
@@ -35,13 +45,15 @@ function AllCampuses(props) {
 
 const mapStateToProps = function (state, ownProps){
 	return {
-		campuses: state.campuses,
-		students: state.students
+		campuses: state.campuses
 	}
 }
 
 const mapDispatchToProps = function (dispatch, ownProps){
 	return {
+		handleEditPress(name, image){
+			dispatch(enterCampus({name, image}))
+		},
 		handleDelete(id){
 			dispatch(deleteCampus(id))
 			dispatch(fetchCampuses())

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 function SelectedStudent(props) {
-	console.log('HIT', props)
 	const student = props.selected || {name: '', email: '', campus: {name: ''}}
 	return (
 		<div className="col-xs-4 container">
@@ -22,7 +21,6 @@ function SelectedStudent(props) {
 
 const mapStateToProps = function (state, ownProps){
 	const studentId = +ownProps.match.params.studentId
-	console.log('state', state, studentId)
 	return {
 		selected: state.students.find(student => student.id === studentId),
 		studentId

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import store, {postStudent, fetchStudents, studentEntry} from '../store'
+import store, {postStudent, fetchStudents, enterStudent} from '../store'
 
 function CreateStudent(props) {
 	const {campuses, handleSubmit, handleInputs} = props
@@ -47,13 +47,13 @@ const mapDispatchToProps = function (dispatch, ownProps){
 		    const value = target.value;
 		    const name = target.name;
 		    // console.log({[name]: value})
-			dispatch(studentEntry({
+			dispatch(enterStudent({
 				[name]: value 
 			}))
 		},
 		handleSubmit(e){
 			e.preventDefault()
-			// console.log('ENTRY IS', store.getState().studentEntry)
+			console.log('ENTRY IS', store.getState().studentEntry)
 
 			dispatch(postStudent(store.getState().studentEntry))
 			dispatch(fetchStudents())
