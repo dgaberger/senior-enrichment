@@ -1,41 +1,33 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 
-function Seed(props) {
-	const {handleClick} = props
+export default function Seed(props) {
+	const campusIdArr =[]
+		campusSeed.forEach(campus => {
+			axios.post('/api/campuses', campus)
+		        .then(res => res.data)
+		        .then(createdCampus => {
+		          campusIdArr.push(createdCampus.id)
+		        })
+        		.catch(console.error)
+		})
+
+		studentSeed.forEach(student => {
+			student.campusId = campusIdArr[student.campusId - 1]
+			axios.post('/api/students', student)
+		        .catch(console.error)
+		})
+
+
 	return (
-		<div className="col-xs-4 container">
-			<h3>Click to Seed</h3>
-			<button onClick={handleClick}>pls click only once, or fix it yourself in postico</button>
+		<div>
+			<h3 />
+			<Link to="../" className="btn btn-primary">Seeding done, click here for the homepage</Link>
 		</div>
 	)
 }
-
-const mapDispatchToProps = function (dispatch, ownProps){
-	return {
-		handleClick(e){
-			const campusIdArr =[]
-			campusSeed.forEach(campus => {
-				axios.post('/api/campuses', campus)
-			        .then(res => res.data)
-			        .then(createdCampus => {
-			          campusIdArr.push(createdCampus.id)
-			        })
-	        		.catch(console.error)
-			})
-
-			studentSeed.forEach(student => {
-				student.campusId = campusIdArr[student.campusId - 1]
-				axios.post('/api/students', student)
-			        .catch(console.error)
-			})
-		}
-	}
-}
-
-export default connect(null, mapDispatchToProps)(Seed)
 
 const campusSeed = [
 	{name: 'Tom', image: 'https://cloud.fullstackacademy.com/Tom-1.jpg?mtime=20160511110611'},
