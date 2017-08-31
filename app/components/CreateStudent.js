@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 import {connect} from 'react-redux'
 import store, {postStudent, fetchStudents, enterStudent} from '../store'
 
@@ -9,21 +8,27 @@ function CreateStudent(props) {
 		<div className="col-xs-4 container">
 			<h3>Student Create:</h3>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="name">Student Name:</label>
-				<input name="name" onChange={handleInputs}/>
-				<label htmlFor="email">Student Email:</label>
-				<input name="email" onChange={handleInputs}/>
-				<label htmlFor="campus">Student Campus:</label>
-				<select name="campusId" onChange={handleInputs}>
-					<option></option>
-					{
-						campuses.map(campus => {
-							return (
-								<option key={campus.id} value={campus.id}>{campus.name}</option>
-							)
-						})
-					}
-				</select>
+				<div>
+					<label htmlFor="name">Student Name:</label>
+					<input name="name" onChange={handleInputs}/>
+				</div>
+				<div>
+					<label htmlFor="email">Student Email:</label>
+					<input name="email" onChange={handleInputs}/>
+				</div>
+				<div>
+					<label htmlFor="campus">Student Campus:</label>
+					<select name="campusId" onChange={handleInputs}>
+						<option></option>
+						{
+							campuses.map(campus => {
+								return (
+									<option key={campus.id} value={campus.id}>{campus.name}</option>
+								)
+							})
+						}
+					</select>
+				</div>
 				<div className="form-group">
 			        <button type="submit" className="btn btn-default">Create Student</button>
 			    </div>
@@ -34,7 +39,6 @@ function CreateStudent(props) {
 
 
 const mapStateToProps = function (state, ownProps){
-
 	return {
 		campuses: state.campuses
 	}
@@ -46,15 +50,12 @@ const mapDispatchToProps = function (dispatch, ownProps){
 			const target = e.target;
 		    const value = target.value;
 		    const name = target.name;
-		    // console.log({[name]: value})
 			dispatch(enterStudent({
 				[name]: value 
 			}))
 		},
 		handleSubmit(e){
 			e.preventDefault()
-			console.log('ENTRY IS', store.getState().studentEntry)
-
 			dispatch(postStudent(store.getState().studentEntry))
 			dispatch(fetchStudents())
 		}

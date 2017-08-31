@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 import {connect} from 'react-redux'
 import store, 	{
 					enterCampus, 
@@ -25,7 +24,7 @@ function EditCampus(props) {
 	const campus = props.selected || {name: '', image: ''}
 	const studentsAt = props.studentsAtCamp || []
 	const studentsNot = props.studentsNotAtCamp || []
-	console.log('CURRENT ENT', campusEntry)
+
 	return (
 		<div className="col-xs-4 container">
 			<h3>Editing: {campus.name}</h3>
@@ -42,12 +41,15 @@ function EditCampus(props) {
 			        <button type="submit" className="btn btn-default">Submit Name/Image</button>
 			    </div>
 			    <ul>
-			    <label>Remove from Campus</label>
+			    <label>Remove from Campus (deletes Student)</label>
 			    {
 			    	studentsAt.map(student => {
 			    		return (
 				    		<li key={student.id}>{student.name}
-				    			<button className="btn btn-danger btn-xs" onClick={evt => handleDelete(student.id)}>X</button>
+				    			<button 
+					    			className="btn btn-danger btn-xs" 
+					    			onClick={evt => handleDelete(student.id)}>
+				    			X</button>
 				    		</li>
 			    		)
 			    	})
@@ -57,7 +59,10 @@ function EditCampus(props) {
 			    	studentsNot.map(student => {
 			    		return (
 				    		<li key={student.id}>{student.name}
-				    			<button className="btn btn-primary btn-xs" onClick={evt => handleAddStud(student.name, student.email, student.id)}>+</button>
+				    			<button 
+				    			className="btn btn-primary btn-xs" 
+				    			onClick={evt => handleAddStud(student.name, student.email, student.id)}>
+				    			+</button>
 				    		</li>
 			    		)
 			    	})
@@ -112,7 +117,6 @@ const mapDispatchToProps = function (dispatch, ownProps){
 			toBeEntered.image = toBeEntered.image || image
 			toBeEntered.id = campusId
 			dispatch(editCampus(toBeEntered))
-			// dispatch(enterCampus({name: '', image: ''}))
 		}
 	}
 }

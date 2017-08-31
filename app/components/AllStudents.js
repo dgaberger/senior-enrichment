@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import store, {deleteStudent, fetchStudents, enterStudent} from '../store'
+import {deleteStudent, fetchStudents, enterStudent} from '../store'
 
 function AllStudents(props) {
-	const {handleDelete, students, handleEditPress} = props
+	const {students, handleDelete, handleEditPress} = props
 	return (
 		<div>
 			<h3>All Students:</h3>
@@ -60,7 +60,6 @@ const mapDispatchToProps = function (dispatch, ownProps){
 	return {
 		handleEditPress(name, email, campusId){
 			dispatch(enterStudent({name, email, campusId}))
-			// console.log('image ehre', image)
 		},
 		handleDelete(id){
 			dispatch(deleteStudent(id))

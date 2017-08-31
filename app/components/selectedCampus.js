@@ -12,6 +12,7 @@ function SelectedCampus(props) {
 				<h4>{campus.name}</h4>
 				<img src={campus.image} className="img-responsive img-rounded" />
 			</div>
+			<h5>Students Attending</h5>
 			<ol>
 				{
 					students.map(student => {
@@ -33,7 +34,6 @@ const mapStateToProps = function (state, ownProps){
 	return {
 		selected: state.campuses.find(campus => campus.id === campusId),
 		students: state.students.filter(student => student.campusId === campusId),
-		campusId
 	}
 }
 

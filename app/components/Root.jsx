@@ -10,6 +10,7 @@ import CreateCampus from './CreateCampus'
 import CreateStudent from './CreateStudent'
 import EditCampus from './EditCampus'
 import EditStudent from './EditStudent'
+import Seed from './Seed'
 
 import store, {fetchStudents, fetchCampuses} from '../store'
 
@@ -38,6 +39,7 @@ export default class Root extends Component {
                 <Route exact path="/students/:studentId/edit" component={EditStudent}/>
                 <Route exact path="/campuses/:campusId" component={SelectedCampus}/>
                 <Route exact path="/students/:studentId" component={SelectedStudent}/>
+                <Route exact path="/seed" component={Seed}/>
             </Switch>
           </div>
         </div>
