@@ -127,7 +127,15 @@ export function editStudent(student){
 		return axios.put(`/api/students/${student.id}`, student)
 	        .then(res => res.data)
 	        .then(editedStudent => {
-	          dispatch(editOneStudent(editedStudent));
+	        	axios.get(`/api/campuses/${editedStudent.campusId}`)
+	        		.then(res => res.data)
+	        		.then(newCampus => {
+	        			console.log(newCampus)
+	        			editedStudent.campus = newCampus
+	        		})
+	        		.catch();
+	        	// console.log('returned from axios', editedStudent)
+	        	dispatch(editOneStudent(editedStudent));
 	        })
 	        .catch(console.error)
 	}
@@ -207,7 +215,7 @@ const rootReducer = function(state = initialState, action) {
  			newStudEntry.email = action.studentEntry.email
  		}
  		if (action.studentEntry.hasOwnProperty('campusId')) {
- 			newStudEntry.campusId = action.studentEntry.campusId
+ 			newStudEntry.campusId = +action.studentEntry.campusId
  		}
  		console.log('newStud', newStudEntry)
  		const returned = Object.assign(

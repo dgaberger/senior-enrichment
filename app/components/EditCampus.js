@@ -31,22 +31,22 @@ function EditCampus(props) {
 			<form onSubmit={evt => handleSubmit(evt, campus.name, campus.image, campus.id)}>
 				<div>
 					<label htmlFor="name">New Name:</label>
-					<input type="text" name="name" onChange={handleInputs} value={campusEntry.name}/>
+					<input type="text" className="form-control" name="name" onChange={handleInputs} value={campusEntry.name}/>
 				</div>
 				<div>
 					<label htmlFor="img">New Image:</label>
-					<input type="text" name="image" onChange={handleInputs} value={campusEntry.image}/>
+					<input type="text" className="form-control" name="image" onChange={handleInputs} value={campusEntry.image}/>
 				</div>
 				<div className="form-group">
-			        <button type="submit" className="btn btn-default">Submit Name/Image</button>
+			        <button type="submit" className="btn btn-primary form-control">Submit Name/Image</button>
 			    </div>
 			    <ul>
 			    <label>Remove from Campus (deletes Student)</label>
 			    {
 			    	studentsAt.map(student => {
 			    		return (
-				    		<li key={student.id}>{student.name}
-				    			<button 
+				    		<li key={student.id} style={{margin: '10px'}}>{student.name}
+				    			<button style={{float: 'right'}}
 					    			className="btn btn-danger btn-xs" 
 					    			onClick={evt => handleDelete(student.id)}>
 				    			X</button>
@@ -58,8 +58,8 @@ function EditCampus(props) {
 			    {
 			    	studentsNot.map(student => {
 			    		return (
-				    		<li key={student.id}>{student.name}
-				    			<button 
+				    		<li key={student.id} style={{margin: '10px'}}>{student.name} (from {student.campus.name})
+				    			<button style={{float: 'right'}}
 				    			className="btn btn-primary btn-xs" 
 				    			onClick={evt => handleAddStud(student.name, student.email, student.id)}>
 				    			+</button>
@@ -117,6 +117,7 @@ const mapDispatchToProps = function (dispatch, ownProps){
 			toBeEntered.image = toBeEntered.image || image
 			toBeEntered.id = campusId
 			dispatch(editCampus(toBeEntered))
+			dispatch(fetchStudents())
 		}
 	}
 }

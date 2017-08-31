@@ -11,14 +11,14 @@ function CreateCampus(props) {
 			<form onSubmit={handleSubmit}>
 				<div>
 					<label htmlFor="name">Campus Name:</label>
-					<input name="name" onChange={handleInputs}/>
+					<input name="name" className="form-control" onChange={handleInputs}/>
 				</div>
 				<div>
 					<label htmlFor="img">Campus Image:</label>
-					<input name="image" onChange={handleInputs}/>
+					<input name="image" className="form-control" onChange={handleInputs}/>
 				</div>
 				<div className="form-group">
-			        <button type="submit" className="btn btn-default">Create Campus</button>
+			        <button type="submit" className="btn btn-success form-control">Create Campus</button>
 			    </div>
 			</form>
 		</div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+
 import store, 	{
 					enterStudent, 
 					editStudent, 
@@ -22,15 +23,15 @@ function EditStudents(props) {
 			<form onSubmit={evt => handleSubmit(evt, student.name, student.email, student.campusId, student.id)}>
 				<div>
 					<label htmlFor="name">New Name:</label>
-					<input name="name" onChange={handleInputs} value={studentEntry.name}/>
+					<input name="name" className="form-control" onChange={handleInputs} value={studentEntry.name}/>
 				</div>
 				<div>
 					<label htmlFor="email">New Email:</label>
-					<input name="email" onChange={handleInputs} value={studentEntry.email}/>
+					<input name="email" className="form-control" onChange={handleInputs} value={studentEntry.email}/>
 				</div>
 				<div>
 					<label htmlFor="campus">New Campus:</label>
-					<select name="campusId" onChange={handleInputs}>
+					<select name="campusId" className="form-control" onChange={handleInputs}>
 						<option/>
 						{
 							campuses.map(campus => {
@@ -42,7 +43,7 @@ function EditStudents(props) {
 					</select>
 				</div>
 				<div className="form-group">
-			        <button type="submit" className="btn btn-default">Submit Name/Email/Campus</button>
+			        <button type="submit" className="btn btn-primary form-control">Submit Name/Email/Campus</button>
 			    </div>
 			</form>
 		</div>
@@ -71,7 +72,7 @@ const mapDispatchToProps = function (dispatch, ownProps){
 			dispatch(fetchStudents())
 		},
 		handleSubmit(e, name, email, campusId, studentId){
-			e.preventDefault()
+			// e.preventDefault()
 			const toBeEntered = store.getState().studentEntry
 			toBeEntered.name = toBeEntered.name || name
 			toBeEntered.email = toBeEntered.email || email

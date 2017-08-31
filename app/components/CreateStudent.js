@@ -10,15 +10,15 @@ function CreateStudent(props) {
 			<form onSubmit={handleSubmit}>
 				<div>
 					<label htmlFor="name">Student Name:</label>
-					<input name="name" onChange={handleInputs}/>
+					<input name="name" className="form-control" onChange={handleInputs}/>
 				</div>
 				<div>
 					<label htmlFor="email">Student Email:</label>
-					<input name="email" onChange={handleInputs}/>
+					<input name="email" className="form-control" onChange={handleInputs}/>
 				</div>
 				<div>
 					<label htmlFor="campus">Student Campus:</label>
-					<select name="campusId" onChange={handleInputs}>
+					<select name="campusId" className="form-control" onChange={handleInputs}>
 						<option></option>
 						{
 							campuses.map(campus => {
@@ -30,7 +30,7 @@ function CreateStudent(props) {
 					</select>
 				</div>
 				<div className="form-group">
-			        <button type="submit" className="btn btn-default">Create Student</button>
+			        <button type="submit" className="btn btn-success form-control">Create Student</button>
 			    </div>
 			</form>
 		</div>
