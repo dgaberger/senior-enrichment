@@ -1,23 +1,23 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-import store, 	{
-					enterStudent, 
-					editStudent, 
-					fetchStudents
-				} from '../store'
+import store, {
+    enterStudent,
+    editStudent,
+    fetchStudents
+} from '../store'
 
 function EditStudents(props) {
-	const 	{
-				handleInputs, 
-				handleSubmit, 
-				selected, 
-				campuses, 
-				studentEntry
-			} = props
-			
-	const student = props.selected || {name: '', email: '', campusId: 0, campus: {name: ''}}
-	return (
+    const {
+        handleInputs,
+        handleSubmit,
+        selected,
+        campuses,
+        studentEntry
+    } = props
+
+    const student = props.selected || { name: '', email: '', campusId: 0, campus: { name: '' } }
+    return (
 		<div className="col-xs-4 container">
 			<h3>Editing: {student.name}</h3>
 			<form onSubmit={evt => handleSubmit(evt, student.name, student.email, student.campusId, student.id)}>
@@ -50,7 +50,6 @@ function EditStudents(props) {
 	)
 }
 
-
 const mapStateToProps = function (state, ownProps){
 	const studentId = +ownProps.match.params.studentId
 	return {
@@ -72,12 +71,11 @@ const mapDispatchToProps = function (dispatch, ownProps){
 			dispatch(fetchStudents())
 		},
 		handleSubmit(e, name, email, campusId, studentId){
-			// e.preventDefault()
+			// e.preventDefault() // force refresh bc I can't get the campus to update
 			const toBeEntered = store.getState().studentEntry
 			toBeEntered.name = toBeEntered.name || name
 			toBeEntered.email = toBeEntered.email || email
 			toBeEntered.campusId = toBeEntered.campusId || campusId
-			console.log('TBE: ', toBeEntered)
 			toBeEntered.id = studentId
 			dispatch(editStudent(toBeEntered))
 		}

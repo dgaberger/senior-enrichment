@@ -1,10 +1,10 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import store, {postStudent, fetchStudents, enterStudent} from '../store'
+import { connect } from 'react-redux'
+import store, { postStudent, fetchStudents, enterStudent } from '../store'
 
 function CreateStudent(props) {
-	const {campuses, handleSubmit, handleInputs} = props
-	return (
+    const { campuses, handleSubmit, handleInputs } = props
+    return (
 		<div className="col-xs-4 container">
 			<h3>Student Create:</h3>
 			<form onSubmit={handleSubmit}>
@@ -37,29 +37,28 @@ function CreateStudent(props) {
 	)
 }
 
-
-const mapStateToProps = function (state, ownProps){
-	return {
-		campuses: state.campuses
-	}
+const mapStateToProps = function(state, ownProps) {
+    return {
+        campuses: state.campuses
+    }
 }
 
-const mapDispatchToProps = function (dispatch, ownProps){
-	return {
-		handleInputs(e){
-			const target = e.target;
-		    const value = target.value;
-		    const name = target.name;
-			dispatch(enterStudent({
-				[name]: value 
-			}))
-		},
-		handleSubmit(e){
-			e.preventDefault()
-			dispatch(postStudent(store.getState().studentEntry))
-			dispatch(fetchStudents())
-		}
-	}
+const mapDispatchToProps = function(dispatch, ownProps) {
+    return {
+        handleInputs(e) {
+            const target = e.target;
+            const value = target.value;
+            const name = target.name;
+            dispatch(enterStudent({
+                [name]: value
+            }))
+        },
+        handleSubmit(e) {
+            e.preventDefault()
+            dispatch(postStudent(store.getState().studentEntry))
+            dispatch(fetchStudents())
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateStudent)
