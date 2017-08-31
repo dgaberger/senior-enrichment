@@ -19,4 +19,4 @@ I am the CTO of the United Assoc. of Interplanetary Campuses that are actually F
 I used sequelize, express, react, and redux when creating this app.
 
 ### Video Walkthrough
-[The link for the video walkthrough](https://www.youtube.com/)
+[The link for the video walkthrough](https://www.youtube.com/watch?v=2I4oNiWTUGM)
