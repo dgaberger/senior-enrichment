@@ -12,7 +12,9 @@ I made a thing!
 6. The site should open in your browser, click the button to refresh and view!
 
 ### The Premise
-I am the CTO of the United Assoc. of Interplanetary Campuses that are actually FSA People. I've created a RESTful web platform that allows one to manage students and campuses.
+I am the CTO of the United Assoc. of Interplanetary Campuses that are actually FSA People. 
+
+-- I've created a RESTful web platform that allows one to manage students and campuses.
 
 ### The tools
 
